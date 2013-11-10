@@ -5,8 +5,11 @@ RhinoWeb
 
 Use by Ruby create a web application auto.
 
-em like:
+## Features
 
+## Usage
+
+```ruby
 application
   :title "AppName"
   :layerCss "bootstrap"
@@ -14,3 +17,5 @@ application
   page
   	homePage
   	  :top 
+
+```
