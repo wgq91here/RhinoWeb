@@ -54,35 +54,32 @@ application do
   }
 
   module {
-    category do
-      beforeSave { }
-      afterSave { }
-      beforeInsert { }
-      beforeDelete { }
-    end
+  }
+
+  event {
+  }
+
+  plugin {
+    modle {
+      category moudle/rcategory  #category id category->category_id 1->1 field,rule,etc.
+    }
   }
   
   page {
   	index do 
   	end
 
-  	list do
-  	end
+    admin do     
+    end
 
-  	view do
-  	end
+  	blog {
+      action ['list','list_category','update','delete','view']
+    }
 
-  	edit do
-  	end
+    album {
+      action ['list','list_category','update','delete','view']
+    }
 
-  	delete do
-  	end
-
-  	update do
-  	end
-
-  	admin do     
-  	end
   }
 
   modle {
@@ -92,16 +89,33 @@ application do
       	content text
       	createDate date
       	owner moudle/user #userid
-        category moudle/rcategory #category id category->category_id 1->1 field,rule,etc.
+        category plugin/category #use module category
       	tags moudle/rtags #auto create tags->blogs *->* field,rule,etc. 
+      }
+      event {
+        beforeSave do 
+          time()
+        end
       }
     end
 
-    category do
+    album do
       attrs {
-        title 
+        title string
+        createDate date
+        owner moudle/user #userid
+        category plugin/category #use module category
+        pictureUrl moudle/uploadfile #uploadfile 
       }
-
+      event {
+        beforeSave do 
+          time()
+        end
+        afterSave { }
+        beforeInsert { }
+        beforeDelete { }
+      }
+    end    
   }
 
 end
