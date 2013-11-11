@@ -18,10 +18,18 @@ application do
   main {
     name "Simple Blog System"
     title "My Blog"
-    layerCss "bootstrap"
+    layer "3L"
+    theme "bootstrap"
   }
 
-  access {
+  #system admin manage
+  admin {
+    ip "127.0.0.1"
+    weburl "/webAdmin"
+    model member,blog
+  }
+
+  auth {
     #system root Manager init and not include db.
     root { 
     	name "admin"
@@ -30,31 +38,28 @@ application do
 
     #member own allow system init
     #ex model
-    member {
-      lable 'user manager'
+    authUser {
       register true
       owner true
       profile true
+      model "member"
       extfield {
       	googlemail mail,true #must
       }      
     }
-
-    #system manage
-    admin {
-		weburl "/admin"
-		manageModel member,blog
-		ip "127.0.0.1"
-    }
-
   }
-  
+
   rule {
 
   }
 
   module {
-
+    category do
+      beforeSave { }
+      afterSave { }
+      beforeInsert { }
+      beforeDelete { }
+    end
   }
   
   page {
@@ -76,8 +81,7 @@ application do
   	update do
   	end
 
-  	admin do
-     
+  	admin do     
   	end
   }
 
@@ -88,8 +92,17 @@ application do
       	content text
       	createDate date
       	owner moudle/user #userid
-      	tags moudle/tags #auto create tags->blogs *->* field,rule,etc. 
-      }      
+        category moudle/rcategory #category id category->category_id 1->1 field,rule,etc.
+      	tags moudle/rtags #auto create tags->blogs *->* field,rule,etc. 
+      }
     end
+
+    category do
+      attrs {
+        title 
+      }
+
+  }
+
 end
 ```
