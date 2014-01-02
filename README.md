@@ -79,6 +79,10 @@ application do
     album {
       action ['list','list_category','update','delete','view']
     }
+    
+    tag {
+      action moudle/rtags # auto find relation model list view & cduv
+    }
 
   }
 
@@ -92,10 +96,6 @@ application do
       model plugin/category
     }
     
-    tag do {
-      model plugin/tag
-    }
-    
     blog do
       attrs {
       	title string
@@ -103,8 +103,7 @@ application do
       	createDate date
       	owner moudle/member #userid
         category category #use module category
-        tag tag
-      	tags moudle/rtags #auto create tags->blogs *->* field,rule,etc. 
+      	tag moudle/rtags #auto create tags->blogs *->* field,rule,etc. 
       }
       event {
         beforeSave do 
