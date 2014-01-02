@@ -83,13 +83,17 @@ application do
   }
 
   modle {
+    member do {
+      model Rhion/member # add all Rhion redefined member fields
+      friend moudle/friend # add friend ids
+    }
+    
     blog do
       attrs {
       	title string
       	content text
       	createDate date
-      	owner moudle/user #userid
-      	owner moudle/firend #firend ids
+      	owner moudle/member #userid
         category plugin/category #use module category
       	tags moudle/rtags #auto create tags->blogs *->* field,rule,etc. 
       }
