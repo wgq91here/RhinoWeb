@@ -88,13 +88,22 @@ application do
       friend moudle/friend # add friend ids
     }
     
+    category do {
+      model plugin/category
+    }
+    
+    tag do {
+      model plugin/tag
+    }
+    
     blog do
       attrs {
       	title string
       	content text
       	createDate date
       	owner moudle/member #userid
-        category plugin/category #use module category
+        category category #use module category
+        tag tag
       	tags moudle/rtags #auto create tags->blogs *->* field,rule,etc. 
       }
       event {
@@ -104,7 +113,7 @@ application do
       }
       setting {
         :listNum => [
-          :label => '',[ :selectFields => '10,20,30,#' ]
+          :label => '', :selectFields => '10,20,30,#' 
         ]
         :showOwn => [
           :label => 'Show Type' ,
@@ -133,6 +142,9 @@ application do
         afterSave { }
         beforeInsert { }
         beforeDelete { }
+      }
+      setting {
+        :albumWidth => [:label => 'album Width', :default => 200]
       }
     end    
   }
