@@ -99,13 +99,17 @@ application do
         end
       }
       setting {
-        listNum emnt 10,20,30,#
-        showOwn do {
-          [
-            [:label => 'show by all' , :allow => { true } ],
-            [:label => 'show by own' , :deny => { session.userid != own.userid  } ],
-            [:label => 'show by firends' , :allow => { session.userid in own.firends } ]
+        :listNum => [
+          :label => '',[ :selectFields => '10,20,30,#' ]
+        ]
+        :showOwn => [
+          :label => 'Show Type' ,
+          [  
+            [:label => 'show by all' , :allow => { true }, :action => '/blog.list~/' ],
+            [:label => 'show by own' , :deny => { session.userid != own.userid  }, :action => 'blog.*' ],
+            [:label => 'show by firends' , :allow => { session.userid in own.firends }, :action => 'blog.list, blog.view' ]
           ]
+        ]
         }
       }
     end
