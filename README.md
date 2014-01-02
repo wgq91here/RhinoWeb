@@ -47,6 +47,10 @@ application do
       	googlemail mail,true #must
       }      
     }
+
+    setting {
+    	
+    }
   }
 
   rule {
@@ -82,6 +86,10 @@ application do
     
     tag {
       action moudle/rtags # auto find relation model list view & cduv
+    }
+
+    category {
+    	action moudle/category	
     }
 
   }
@@ -135,7 +143,7 @@ application do
         pictureUrl moudle/uploadfile #uploadfile 
       }
       event {
-        beforeSave do 
+        beforeSave do
           time()
         end
         afterSave { }
@@ -145,7 +153,7 @@ application do
       setting {
         :albumWidth => [:label => 'album Width', :default => 200]
       }
-    end    
+    end
   }
 
 end
