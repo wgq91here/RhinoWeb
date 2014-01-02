@@ -49,7 +49,7 @@ application do
     }
 
     setting {
-    	
+
     }
   }
 
@@ -65,7 +65,7 @@ application do
 
   plugin {
     modle {
-      category moudle/rcategory  #category id category->category_id 1->1 field,rule,etc.
+      :category => 'moudle/rcategory'  #category id category->category_id 1->1 field,rule,etc.
     }
   }
   

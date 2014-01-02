@@ -1,27 +1,83 @@
-module Application
-  def main
-    {
-        :name => "Simple Blog System",
-        :title => "My Blog",
-        :layer => "3L",
-        :theme => "bootstrap"
-    }
-  end
+rhino::application do
+  define :main , {
+    :name => "Simple Blog System",
+  }
 
-  #system admin manage
-  def admin
-    {
-        :ip => "127.0.0.1",
-        :weburl => "/webAdmin",
-        :model => 'member, blog'
-    }
-  end
+  enable :admin
+  enable :authUser
 
-  auth {
+  model :blog , {
+    attrs {
+      title string
+      content text
+      createDate date
+      owner moudle/member #userid
+      category category #use module category
+      tag moudle/rtags #auto create tags->blogs *->* field,rule,etc.
+    }
+    event {
+      beforeSave do
+        time()
+      end
+    }    
+  }
+
+  auth :
+      register true
+      owner true
+      profile true
+      model Rhino::member
+      extfield {
+        googlemail mail, true #must
+      }
+
+end
+rhino::application do
+  {
+    :main => {
+      :name => "Simple Blog System",
+      :title => "My Blog",
+      :layer => "3L",
+      :theme => "bootstrap"
+    },
+    :db => {
+      :development => DataMapper.setup(:default, "sqlite3://" + Padrino.root('db', "t1_development.db")),
+      :production  => DataMapper.setup(:default, "sqlite3://" + Padrino.root('db', "t1_production.db")),
+      :test        => DataMapper.setup(:default, "sqlite3://" + Padrino.root('db', "t1_test.db"))
+    },
+    :admin => {
+      :allow_ip => "127.0.0.1",
+      :web_url => "/webAdmin",
+      :admin_models => 'member, blog',
+      :auth => load_user_name_password, # load_user_name_password(&username,&password,&salt)
+      # or
+      #:auth => {
+      #  :name => 'admin',
+      #  :password => 'admin'
+      #  :salt => ''
+      #}
+    },
+    :auth => {
+      :root => {
+        :name => 'admin',
+        :password => 'admin'
+      },
+    },
+    :model => {
+
+    }
+  }
+end
+
+#system admin manage
+rhion::admin do
+end
+
+  def auth
     #system root Manager init and not include db.
-    root {
-      name "admin"
-      passwd "admin"
+    set :root, {
+        :name => "admin",
+        :passwd => "admin"
     }
 
     #member own allow system init
@@ -39,7 +95,7 @@ module Application
     setting {
 
     }
-  }
+  end
 
   rule {
 
@@ -149,5 +205,3 @@ module Application
           }
         end
         }
-
-      end
