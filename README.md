@@ -42,7 +42,7 @@ application do
       register true
       owner true
       profile true
-      model "member"
+      model Rhino::member
       extfield {
       	googlemail mail,true #must
       }      
@@ -89,6 +89,7 @@ application do
       	content text
       	createDate date
       	owner moudle/user #userid
+      	owner moudle/firend #firend ids
         category plugin/category #use module category
       	tags moudle/rtags #auto create tags->blogs *->* field,rule,etc. 
       }
@@ -96,6 +97,16 @@ application do
         beforeSave do 
           time()
         end
+      }
+      setting {
+        listNum emnt 10,20,30,#
+        showOwn do {
+          [
+            [:label => 'show by all' , :allow => { true } ],
+            [:label => 'show by own' , :deny => { session.userid != own.userid  } ],
+            [:label => 'show by firends' , :allow => { session.userid in own.firends } ]
+          ]
+        }
       }
     end
 
