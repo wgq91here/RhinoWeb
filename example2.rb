@@ -8,7 +8,7 @@ RConfig = Rhino::Config do
 end
 
 # Widget contains model forms and etc. (ex: html and javasciprt) 
-# it render by templates
+# it render by templates 中文 测试
 RWidget = Rhino::Widget do
   :list_book_title {
     :template # default it's name
