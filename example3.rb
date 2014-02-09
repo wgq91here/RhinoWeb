@@ -32,7 +32,7 @@ my_system::data do
   }
 end
 
-my_system::modle {
+my_system::modle do
   :blog => {
       :table_name => 'blog',
       :fields => [
@@ -42,7 +42,7 @@ my_system::modle {
       # update and create timestamp auto
       ]
   }
-}
+end
 
 my_system::widget do
   :login {
