@@ -8,19 +8,18 @@ Use by Ruby create a web application auto.
 ## Features
 
 # Moudle
-Rhino_config 
-Rhino_auth 
-Rhino_event 
-Rhino_page 
-Rhino_widget 
-Rhino_data 
-Rhino_model
+- Rhino_config 
+- Rhino_auth 
+- Rhino_event 
+- Rhino_page 
+- Rhino_widget 
+- Rhino_data 
+- Rhino_model
 
 # Details
 Rhino_config 
 - db_connect 
 - title 
--
 
 Rhino_auth 
 - user {groups} => Rhino_data
@@ -55,8 +54,13 @@ my_system::event = {
 
 my_system::data = {
   :blogs => {
-    :model => 'blog',
-    :fields => 'title,content'
+    :model 'blog',
+    :fields 'title,content',
+    :condition ''
+  },
+  :all_blogs {
+    :model 'blog',
+    # default is all fields     
   }
 }
 
@@ -71,6 +75,55 @@ my_system::modle = {
     ]
   }
 }
+
+my_system::widget do
+  :login {
+    # default find template string , file -> 'wg_#{widget_name}'
+    :template_file 'wg_login',
+    # wg_login.rb
+    # 
+    # 
+  },
+  :nav_blog {
+
+  },
+  :form_blog {
+
+  },  
+  :list_blog {
+    :data 'blogs',
+    :buildin_template 'table'
+    :pager true
+  }
+end
+
+my_system::widget.add do
+  :about_me = {
+    '''
+    i am RhinoWeb.
+    '''
+  }
+end
+
+my_system::page do
+  :login = {
+    :layout = '1L',
+    :wg_1L = [:login]
+  }
+  :blog = {
+    :auth = true,
+    #:rule = ''
+    :layout = '3W',
+    :wg_3W = [:nav_blog, list_blog, nil]
+  }
+end
+
+my_system::page.add do
+  :about_me = {
+    :layout = '2L',
+    :wg_2L = ['nav','about_me']
+  }
+end
 
 #...
 
