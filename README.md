@@ -129,6 +129,8 @@ end
 
 my_system.run! 
 #or
+my_system.update! 
+#or
 my_sytem.generate!
 ```
 
