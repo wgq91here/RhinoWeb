@@ -35,24 +35,24 @@ preview2:
 ```ruby
 my_system = Rhino::Application.new
 
-my_system::config = {
+my_system::config {
   :db => []
 }
 
-my_system::config.add = {
+my_system::config.add  {
   :name => 'My System'
 }
 
-my_system::auth = { 
+my_system::auth {
   :enable => true ,
   :user => { :ext_fields => ['int:age:scope(1..2)']}
 }
 
-my_system::event = {
+my_system::event {
   
 }
 
-my_system::data = {
+my_system::data {
   :blogs => {
     :model 'blog',
     :fields 'title,content',
@@ -64,7 +64,7 @@ my_system::data = {
   }
 }
 
-my_system::modle = {
+my_system::modle {
   :blog => {
     :table_name => 'blog',
     :fields =>[
