@@ -1,8 +1,15 @@
-:sd
-数据流
+:数据流
+  :model
+  :service
 
 
-页面流
-操作流
+:页面流
+  #
+  :page
+  :view
+  :widget
+
+:操作流
+
 事件流
 
