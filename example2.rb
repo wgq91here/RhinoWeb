@@ -1,14 +1,21 @@
-RConfig = Rhino::Config do
-  :db {
-  }
+# Rhino_config
+# Rhino_auth
+# Rhino_event
+# Rhino_page
+# Rhino_widget
 
-  :modle {
+RConfig = Rhino::Config do
+  :db = ''
+
+  :modle do
     :user
-  }
+  end
 end
 
+RAuth = Rhino::Auth::
+
 # Widget contains model forms and etc. (ex: html and javasciprt) 
-# it render by templates 中文 测试
+# it render by templates 中文中文测试中测试
 RWidget = Rhino::Widget do
   :list_book_title {
     :template # default it's name
