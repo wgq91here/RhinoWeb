@@ -33,7 +33,7 @@ my_system::data do
 end
 
 my_system::modle do
-  :blog => {
+  set :blog, {
       :table_name => 'blog',
       :fields => [
           # id etc. auto
@@ -45,44 +45,47 @@ my_system::modle do
 end
 
 my_system::widget do
-  :login {
-      # default find template string , file -> 'wg_#{widget_name}'
-      :template_file 'wg_login',
-      # wg_login.rb
-      #
-      #
-  },
-      :nav_blog {
+  df :login do
+    # default find template string , file -> 'wg_#{widget_name}'
+    :template_file => 'wg_login'
+    # wg_login.rb
+    #
+    #
+  end
 
-  },
-      :form_blog {
+  df :nav_blog do
+  end
 
-  },
-      :list_blog {
-      :data 'blogs',
-      :buildin_template 'table'
-  :pager true
-  }
+  df :form_blog do
+
+  end
+
+  df :list_blog do
+    :data => 'blogs'
+    :buildin_template => 'table',
+        :pager => true
+  end
 end
 
 my_system::widget.add do
-  :about_me = {
-      '' '
+  df :about_me do
+    '' '
     i am RhinoWeb.
     ' ''
-  }
+  end
 end
 
 my_system::page do
-  :login = {
-      :layout = '1L',
-      :wg_1L = [:login]
+  df :login, {
+      :layout => '1L',
+      :wg_1L => [:login]
   }
-  :blog = {
-      :auth = true,
-  #:rule = ''
-  :layout = '3W',
-      :wg_3W = [:nav_blog, list_blog, nil]
+
+  df :blog, {
+      :auth => true,
+      #:rule = ''
+      :layout => '3W',
+      :wg_3W => [:nav_blog, list_blog, nil]
   }
 end
 

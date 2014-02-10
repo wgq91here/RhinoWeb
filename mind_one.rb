@@ -1,15 +1,38 @@
-:数据流
-  :model
-  :service
+module Rh
+  def df(sym)
+    puts sym.to_s
+    yield
+  end
+
+  def set(sym, value)
+    puts sym
+    puts value
+  end
+
+  #Config = config
+  module RConfig
+      def add
+        yield
+      end
+  end
+
+end
+
+my_system = Rh
+puts my_system
+puts my_system::RConfig
 
 
-:页面流
-  #
-  :page
-  :view
-  :widget
+my_system::RConfig.add do
+  df :blog do
+    set :auth, true
+    #:rule = ''
+    layout = '3W'
+    wg_3W = [:nav_blog, :list_blog, nil]
+  end
+end
 
-:操作流
 
-事件流
-
+my_system1 = Rh
+puts my_system1
+puts my_system1::RConfig
