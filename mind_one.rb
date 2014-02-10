@@ -29,10 +29,6 @@ my_system::RConfig.add do
     #:rule = ''
     layout = '3W'
     wg_3W = [:nav_blog, :list_blog, nil]
+    wg_3W
   end
 end
-
-
-my_system1 = Rh
-puts my_system1
-puts my_system1::RConfig
