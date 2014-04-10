@@ -9,30 +9,24 @@ module Rh
     puts value
   end
 
-
   #Config = config
   module RConfig
+    def add
+      yield
+    end
+  end
 
+  module RPages
     def add
       yield
     end
 
-  end
+    def to_s
+      puts self
+    end
 
-  module RPages
-    class Rhino_pages
-
-      def add
-        yield
-      end
-
-      def to_s
-        puts self
-      end
-
-      def layout(layoutName)
-        puts layoutName
-      end
+    def layout(layoutName)
+      puts layoutName
     end
   end
 
